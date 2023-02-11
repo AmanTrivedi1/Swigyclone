@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Card from "./Card";
 import { BsSearch } from "react-icons/bs";
+import useOnline from "../Utils/useOnline";
 // import { resraurantList } from "../Componants/Constants";
 import Shimmer from "../Componants/Simmer";
 import { Link } from "react-router-dom";
-
-function filterData(searchText, restaurant) {
-  const filterdData = restaurant.filter((restaurant) =>
-    restaurant.data.name.toLowerCase()?.includes(searchText.toLowerCase())
-  );
-  return filterdData;
-}
+import { filterData } from "../Utils/Helper";
 
 const Body = () => {
   const [allRestaurant, setAllRestaurant] = useState([]);
@@ -21,6 +16,13 @@ const Body = () => {
     getRestaurants();
   }, []);
 
+
+const isOnline =useOnline();
+
+if(!isOnline){
+  return <h1 className="text-4xl text-[#4ADE80] font-poppins flex items-center justify-center ">Offline Please Check Your Conection</h1>
+}
+
   async function getRestaurants() {
     const data = await fetch(
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
@@ -29,7 +31,28 @@ const Body = () => {
     setAllRestaurant(json?.data?.cards[2]?.data?.data?.cards);
     setfilteredRestaurant(json?.data?.cards[2]?.data?.data?.cards);
   }
-  if (!allRestaurant.length === 0) return "Data Not find";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // if (!allRestaurant.length === 0) return "Data Not find";
 
   if (filteresRestaurant.length === 0) return "No Restraunt founded";
   return allRestaurant.length === 0 ? (

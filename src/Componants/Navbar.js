@@ -19,6 +19,9 @@ const Navbar = () => {
      <Link to ="/Contact">
         <li>Contact</li>
      </Link>
+     <Link to ="/Instamart">
+        <li>Instamart</li>
+     </Link>
      </ul>
     </div>
     <div className="cursor-pointer" >

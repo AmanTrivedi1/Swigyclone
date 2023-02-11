@@ -13,7 +13,7 @@ const Card = ({
     <>
       
         <div className=" hover:border  hover:shadow-md cursor-pointer bg-white p-5 h-96  max-w-xs">
-          <div>
+          <div >
             <img
               className=""
               src={IMG_CDN_URL + cloudinaryImageId}

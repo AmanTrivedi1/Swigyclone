@@ -1,26 +1,14 @@
-import React, { useEffect, useState } from "react";
+
 import { useParams } from "react-router-dom";
 import { IMG_CDN_URL } from "../Componants/Constants";
+import useReastaurant from "../Utils/useRestaurant";
 import Simmer from "./Simmer";
 
 const RestauntDetails = () => {
   const { resId } = useParams();
   console.log(resId);
-  const [restaurant, setRestaurant] = useState(null);
 
-  useEffect(() => {
-    getRestraurntInfo();
-  }, []);
-
-  async function getRestraurntInfo() {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/menu/v4/full?lat=26.4521442&lng=80.2888364&menuId=" +
-        resId
-    );
-    const json = await data.json();
-    console.log(json.data);
-    setRestaurant(json.data);
-  }
+  const [restaurant] = useReastaurant(resId);
 
   if (!restaurant) {
     return <Simmer />;
@@ -29,11 +17,12 @@ const RestauntDetails = () => {
   return (
     <>
       <div className="">
-        <div className="flex p-4 justify-center sticky gap-x-20 font-poppins text-[#fff] bg-[#171A29]">
+        <div className="flex p-4 sticky top-0 z-50 justify-center duration-150 transition-all gap-x-20 font-poppins text-[#fff] bg-[#171A29]">
           <div>
             <img
               className="max-h-52"
               src={IMG_CDN_URL + restaurant?.cloudinaryImageId}
+              alt=""
             />
           </div>
           <div className="leading-10 flex-col flex  gap-y-2">
@@ -61,18 +50,21 @@ const RestauntDetails = () => {
               <div key={item.id}>
                 <div className="max-w-2xl flex items-center justify-between  p-4 border-b-2">
                   <div className="w-96">
-                  <h3 className="text-[#4D5060] font-medium ">{item.name} </h3>
-                  <h3 className="text-[#4D5060] text-xs">{item.price / 100} INR </h3>
-                  <p className="overflow-hidden text-[#C1C2C7] font-light text-sm ">
-                    {" "}
-                    {item?.description}{" "}
-                  </p>
+                    <h3 className="text-[#4D5060] font-medium ">
+                      {item.name}{" "}
+                    </h3>
+                    <h3 className="text-[#4D5060] text-xs">
+                      {item.price / 100} INR{" "}
+                    </h3>
+                    <p className="overflow-hidden text-[#C1C2C7] font-light text-sm ">
+                      {" "}
+                      {item?.description}{" "}
+                    </p>
                   </div>
                   <div className="">
                     <img
                       className="max-h-20 rounded-lg"
                       src={IMG_CDN_URL + item?.cloudinaryImageId}
-                      alt="Items Image"
                     />
                   </div>
                 </div>
