@@ -9,6 +9,7 @@ import Body from "./Componants/Body";
 import Footer from "./Componants/Footer";
 import Error from "./Componants/Error";
 import Contact from "./Componants/Contact";
+import Simmer from "./Componants/Simmer";
 // import Instamart from "./Componants/Instamart";
 
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
@@ -41,7 +42,7 @@ const appRouter = createBrowserRouter([
       {
         path: "/about",
         element: (
-          <Suspense fallback={<h1>Loading...</h1>}>
+          <Suspense fallback={<Simmer/>}>
             <About />
           </Suspense>
         ),
@@ -63,7 +64,7 @@ const appRouter = createBrowserRouter([
       {
         path: "/instamart",
         element: (
-          <Suspense fallback={<h1>Loading...</h1>}>
+          <Suspense fallback={<Simmer/>}>
             <Instamart />
           </Suspense>
         ),

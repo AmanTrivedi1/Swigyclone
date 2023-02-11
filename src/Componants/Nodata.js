@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const Nodata = () => {
-  return (
-    <div>Nodata</div>
-  )
-}
+  return <div>Nodata</div>;
+};
 
-export default Nodata
+export default Nodata;

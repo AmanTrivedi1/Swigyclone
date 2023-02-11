@@ -1,4 +1,3 @@
-
 import { useParams } from "react-router-dom";
 import { IMG_CDN_URL } from "../Componants/Constants";
 import useReastaurant from "../Utils/useRestaurant";
