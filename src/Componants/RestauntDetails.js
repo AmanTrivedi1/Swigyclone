@@ -1,5 +1,7 @@
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { IMG_CDN_URL } from "../Componants/Constants";
+import { addItem } from "../Utils/cartSlice";
 import useReastaurant from "../Utils/useRestaurant";
 import Simmer from "./Simmer";
 
@@ -9,6 +11,11 @@ const RestauntDetails = () => {
 
   const [restaurant] = useReastaurant(resId);
 
+  const dispatch = useDispatch();
+
+  const handleAddItems = (item) => {
+    dispatch(addItem(item));
+  };
   if (!restaurant) {
     return <Simmer />;
   }
@@ -43,6 +50,7 @@ const RestauntDetails = () => {
             </div>
           </div>
         </div>
+        {/* <div></div> */}
         <div className=" flex justify-center ">
           <div className=" font-poppins pt-10 pb-10 ">
             {Object.values(restaurant?.menu?.items).map((item) => (
@@ -60,11 +68,17 @@ const RestauntDetails = () => {
                       {item?.description}{" "}
                     </p>
                   </div>
-                  <div className="">
+                  <div className=" flex flex-col items-center justify-center gap-1">
                     <img
                       className="max-h-20 rounded-lg"
                       src={IMG_CDN_URL + item?.cloudinaryImageId}
                     />
+                    <button
+                      className="text-xs bg-[#4ADE80] px-2 py-1"
+                      onClick={() => handleAddItems(item)}
+                    >
+                      Add Items
+                    </button>
                   </div>
                 </div>
               </div>
